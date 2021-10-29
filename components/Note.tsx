@@ -3,7 +3,7 @@ import Button from './Button';
 
 const Note: React.FC = ({ children }) => {
    return (
-      <div className="flex flex-col h-3/4 w-full sm:w-4/6 my-10 mx-4 sm:mx-20 border-l border-t dark:border-background-secondary shadow-lg">
+      <div className="flex flex-col w-full min-w-0 md:w-4/6 mb-10 mx-4 sm:mx-8 lg:mx-20 border-l border-t dark:border-background-secondary shadow-lg">
          {children}
       </div>
    );
@@ -22,7 +22,7 @@ const Title: React.FC = () => {
    return (
       <input
          type="text"
-         className="flex flex-grow bg-transparent text-center text-3xl border-none focus:ring-transparent text-foreground my-2"
+         className="flex flex-grow bg-transparent text-center text-3xl border-none focus:ring-transparent text-foreground"
          placeholder="Title"
       ></input>
    );
@@ -30,7 +30,7 @@ const Title: React.FC = () => {
 
 const Save: React.FC = () => {
    return (
-      <div className="flex my-2">
+      <div className="">
          <Button.Rounded>
             <FaSave size="24" />
          </Button.Rounded>
@@ -40,7 +40,7 @@ const Save: React.FC = () => {
 
 const ListItem: React.FC = ({ children }) => {
    return (
-      <div className="text-center dark:text-foreground bg-transparent hover:bg-gray-200 dark:hover:bg-active cursor-pointer py-3 border-t dark:border-active w-full">
+      <div className="text-center dark:text-foreground bg-transparent hover:bg-gray-200 dark:hover:bg-active cursor-pointer py-3 border-t dark:border-active w-full active:scale-110 active:shadow-md">
          {children}
       </div>
    );

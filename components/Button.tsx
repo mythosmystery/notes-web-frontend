@@ -14,7 +14,7 @@ const Rounded: React.FC<Props> = ({ children, onClick }) => {
    return (
       <button
          onClick={onClick}
-         className="dark:bg-active bg-selection rounded-full m-2 p-2 shadow-lg dark:hover:bg-foreground hover:bg-background dark:hover:text-accent hover:text-foreground active:scale-125"
+         className="dark:bg-active bg-selection rounded-full m-2 p-2 shadow-lg dark:hover:bg-foreground hover:bg-background dark:hover:text-accent hover:text-accent active:scale-125"
       >
          {children}
       </button>

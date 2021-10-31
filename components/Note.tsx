@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import { FaSave } from 'react-icons/fa';
+import { UserContext, UserContextType } from '../utils/UserContext';
 import Button from './Button';
 
 const Note: React.FC = ({ children }) => {
@@ -29,9 +31,10 @@ const Title: React.FC = () => {
 };
 
 const Save: React.FC = () => {
+   const { refetch } = useContext(UserContext) as UserContextType;
    return (
       <div className="">
-         <Button.Rounded>
+         <Button.Rounded onClick={refetch}>
             <FaSave size="24" />
          </Button.Rounded>
       </div>

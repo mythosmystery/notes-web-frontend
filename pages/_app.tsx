@@ -14,9 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Provider value={client}>
          <ThemeProvider>
             <ThemeWrapper>
-               <div className="min-h-screen w-min-screen dark:bg-background z-0 font-mono">
-                  <Component {...pageProps} />
-               </div>
+               <Component {...pageProps} />
             </ThemeWrapper>
          </ThemeProvider>
       </Provider>

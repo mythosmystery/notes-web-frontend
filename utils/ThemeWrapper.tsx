@@ -7,7 +7,7 @@ const ThemeWrapper: FC = ({ children }) => {
    const { dark, toggleDark } = useContext(ThemeContext) as ThemeContextType;
    return (
       <div className={dark ? 'dark' : ''}>
-         <div className="min-h-screen min-w-screen dark:bg-background z-0 font-mono">
+         <div className="min-h-screen dark:bg-background z-0 font-mono">
             <div className="absolute">
                <Button.Rounded onClick={toggleDark}>{dark ? <FaSun size="22" /> : <FaMoon size="22" />}</Button.Rounded>
             </div>

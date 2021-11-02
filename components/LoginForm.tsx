@@ -1,4 +1,5 @@
 import { FC, FormEventHandler, useState } from 'react';
+import { useMutation, gql } from 'urql';
 import TextInput from './TextInput';
 
 declare module 'react' {
@@ -7,13 +8,29 @@ declare module 'react' {
       name: string;
    }
 }
+const Login = gql`
+   mutation login($email: String!, $password: String!) {
+      login(email: $email, password: $password) {
+         id
+         email
+         firstName
+         lastName
+      }
+   }
+`;
 
 const LoginForm: FC = () => {
    const [formState, setFormState] = useState({ email: '', password: '' });
-
-   const onSubmit: FormEventHandler = event => {
+   const [loginResult, login] = useMutation(Login);
+   const onSubmit: FormEventHandler = async event => {
       event.preventDefault();
-      console.log(formState);
+      const newLogin = await login({
+         variables: {
+            email: 'test@test.net',
+            password: 'password',
+         },
+      });
+      console.log(newLogin);
    };
    const onChange: FormEventHandler = ({ target }) => {
       const { name, value } = target;

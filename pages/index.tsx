@@ -5,7 +5,7 @@ import RegisterForm from '../components/RegisterForm';
 
 const Home: React.FC = () => {
    return (
-      <>
+      <div className="h-screen">
          <Head>
             <title>Create Next App</title>
             <link rel="icon" href="/favicon.ico" />
@@ -18,7 +18,7 @@ const Home: React.FC = () => {
             <LoginForm />
             <RegisterForm />
          </div>
-      </>
+      </div>
    );
 };
 export default Home;

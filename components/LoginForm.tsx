@@ -1,3 +1,4 @@
+import { useRouter } from 'next/dist/client/router';
 import { FC, FormEventHandler, useState } from 'react';
 import { useMutation, gql } from 'urql';
 import TextInput from './TextInput';
@@ -20,17 +21,20 @@ const Login = gql`
 `;
 
 const LoginForm: FC = () => {
+   const router = useRouter();
    const [formState, setFormState] = useState({ email: '', password: '' });
    const [loginResult, login] = useMutation(Login);
    const onSubmit: FormEventHandler = async event => {
       event.preventDefault();
-      const newLogin = await login({
-         variables: {
-            email: 'test@test.net',
-            password: 'password',
-         },
+      const { data } = await login({
+         email: formState.email,
+         password: formState.password,
       });
-      console.log(newLogin);
+      console.log(data);
+      if (data) {
+         setFormState({ email: '', password: '' });
+         router.push('/notes');
+      }
    };
    const onChange: FormEventHandler = ({ target }) => {
       const { name, value } = target;
@@ -45,7 +49,11 @@ const LoginForm: FC = () => {
          <div className="flex flex-col dark:bg-background-secondary shadow-md p-2">
             <TextInput type="text" placeholder="Email..." name="email" />
             <TextInput type="password" placeholder="Password..." name="password" />
-            <button type="submit" className="p-1 dark:hover:text-accent hover:text-background dark:text-foreground text-lg ">
+            <button
+               type="submit"
+               disabled={loginResult.fetching}
+               className="p-1 dark:hover:text-accent hover:text-background dark:text-foreground text-lg "
+            >
                Login
             </button>
          </div>

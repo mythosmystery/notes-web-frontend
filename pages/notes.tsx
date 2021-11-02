@@ -1,6 +1,26 @@
+import { useQuery, gql } from 'urql';
 import Note from '../components/Note';
 
+const GetMe = gql`
+   query getMe {
+      me {
+         id
+         firstName
+         lastName
+         email
+         notes {
+            id
+            title
+            body
+            date
+         }
+      }
+   }
+`;
+
 export default function Notes() {
+   const [queryResult, reexecute] = useQuery({ query: GetMe });
+   console.log(queryResult);
    return (
       <>
          <h1 className="dark:text-foreground text-center py-8 text-4xl">Notes</h1>

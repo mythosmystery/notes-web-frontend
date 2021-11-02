@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app';
 import { createClient } from '@urql/core';
 import { Provider } from 'urql';
 import { ThemeProvider } from '../utils/ThemeContext';
-import ThemeWrapper from '../utils/ThemeWrapper';
+import ThemeWrapper from '../components/ThemeWrapper';
 
 const client = createClient({
    url: 'https://hb-notes-backend.herokuapp.com/graphql',

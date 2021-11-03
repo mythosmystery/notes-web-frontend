@@ -1,8 +1,8 @@
 import { Field, Form, Formik, FormikHelpers } from 'formik';
 import { FC } from 'react';
 import { useRouter } from 'next/dist/client/router';
-import { useLoginMutation } from '../generated/graphql';
-import TextInput from './TextInput';
+import { useLoginMutation } from '../../generated/graphql';
+import TextInput from '../ui-components/TextInput';
 
 interface FormValues {
    email: string;

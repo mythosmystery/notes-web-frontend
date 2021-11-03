@@ -1,8 +1,8 @@
 import { ErrorMessage, Field, Form, Formik, FormikErrors, FormikHelpers } from 'formik';
 import { useRouter } from 'next/dist/client/router';
 import { FC } from 'react';
-import { useRegisterMutation } from '../generated/graphql';
-import TextInput from './TextInput';
+import { useRegisterMutation } from '../../generated/graphql';
+import TextInput from '../ui-components/TextInput';
 
 interface FormValues {
    email: string;

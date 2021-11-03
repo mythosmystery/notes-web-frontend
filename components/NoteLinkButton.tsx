@@ -1,6 +1,6 @@
 import { Dispatch, FC, MouseEventHandler, ReactNode, SetStateAction } from 'react';
 import { NoteType } from '../utils/types';
-import Note from './Note';
+import Note from './ui-components/Note';
 
 interface Props {
    children: ReactNode;

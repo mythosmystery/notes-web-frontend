@@ -120,6 +120,14 @@ export type RegisterMutationVariables = Exact<{
 
 export type RegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'User', id: string, firstName: string, lastName: string, email: string } };
 
+export type WriteNoteMutationVariables = Exact<{
+  title: Scalars['String'];
+  body: Scalars['String'];
+}>;
+
+
+export type WriteNoteMutation = { __typename?: 'Mutation', writeNote: { __typename?: 'Note', id: string, title: string, body: string } };
+
 export type GetMeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -170,6 +178,19 @@ export const RegisterDocument = gql`
 
 export function useRegisterMutation() {
   return Urql.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument);
+};
+export const WriteNoteDocument = gql`
+    mutation writeNote($title: String!, $body: String!) {
+  writeNote(title: $title, body: $body) {
+    id
+    title
+    body
+  }
+}
+    `;
+
+export function useWriteNoteMutation() {
+  return Urql.useMutation<WriteNoteMutation, WriteNoteMutationVariables>(WriteNoteDocument);
 };
 export const GetMeDocument = gql`
     query getMe {

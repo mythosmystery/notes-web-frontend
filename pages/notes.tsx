@@ -1,16 +1,17 @@
 import { useState } from 'react';
-import Note from '../components/Note';
 import NoteLinkButton from '../components/NoteLinkButton';
 import { useGetMyNotesQuery } from '../generated/graphql';
 import { NoteType } from '../utils/types';
+import NoteForm from '../components/forms/NoteForm';
 
 export default function Notes() {
-   const [currentNote, setCurrentNote] = useState(null as null | NoteType);
+   const [, setCurrentNote] = useState(null as null | NoteType);
    const [result] = useGetMyNotesQuery();
    const { data, fetching } = result;
    if (fetching) {
       return null;
    }
+   console.log(data);
    return (
       <>
          <h1 className="dark:text-foreground text-center py-8 text-4xl">Notes</h1>
@@ -25,11 +26,7 @@ export default function Notes() {
                   );
                })}
             </div>
-            <Note>
-               <Note.Save />
-               <Note.Title value={currentNote?.title} />
-               <Note.Textarea />
-            </Note>
+            <NoteForm />
          </div>
       </>
    );

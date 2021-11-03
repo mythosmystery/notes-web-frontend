@@ -1,6 +1,6 @@
 import { FC, useContext } from 'react';
 import { FaMoon, FaSun } from 'react-icons/fa';
-import Button from './Button';
+import Button from './ui-components/Button';
 import { ThemeContext, ThemeContextType } from '../utils/ThemeContext';
 
 const ThemeWrapper: FC = ({ children }) => {

@@ -1,7 +1,13 @@
-import { useContext } from 'react';
+import { MouseEventHandler, ReactNode, useContext } from 'react';
 import { FaSave } from 'react-icons/fa';
 import { UserContext, UserContextType } from '../utils/UserContext';
 import Button from './Button';
+
+interface Props {
+   children?: ReactNode;
+   onClick?: MouseEventHandler;
+   value?: string;
+}
 
 const Note: React.FC = ({ children }) => {
    return (
@@ -11,21 +17,23 @@ const Note: React.FC = ({ children }) => {
    );
 };
 
-const Textarea: React.FC = () => {
+const Textarea: React.FC<Props> = ({ value }) => {
    return (
       <textarea
          className="flex bg-transparent border-transparent dark:text-foreground focus:border-transparent focus:ring-transparent w-full h-full resize-none px-6 py-4"
          placeholder="Start writing your note..."
+         value={value}
       ></textarea>
    );
 };
 
-const Title: React.FC = () => {
+const Title: React.FC<Props> = ({ value }) => {
    return (
       <input
          type="text"
          className="flex flex-grow bg-transparent text-center text-3xl border-none focus:ring-transparent text-foreground"
          placeholder="Title"
+         value={value}
       ></input>
    );
 };
@@ -41,9 +49,12 @@ const Save: React.FC = () => {
    );
 };
 
-const ListItem: React.FC = ({ children }) => {
+const ListItem: React.FC<Props> = ({ children, onClick }) => {
    return (
-      <div className="text-center dark:text-foreground bg-transparent hover:bg-gray-200 dark:hover:bg-active cursor-pointer py-3 border-t dark:border-active w-full active:scale-110 active:shadow-md">
+      <div
+         onClick={onClick}
+         className="text-center dark:text-foreground bg-transparent hover:bg-gray-200 dark:hover:bg-active cursor-pointer py-3 border-t dark:border-active w-full active:scale-110 active:shadow-md"
+      >
          {children}
       </div>
    );

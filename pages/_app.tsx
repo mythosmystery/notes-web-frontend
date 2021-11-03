@@ -7,6 +7,9 @@ import ThemeWrapper from '../components/ThemeWrapper';
 
 const client = createClient({
    url: 'https://hb-notes-backend.herokuapp.com/graphql',
+   fetchOptions: {
+      credentials: 'include',
+   },
 });
 
 function MyApp({ Component, pageProps }: AppProps) {

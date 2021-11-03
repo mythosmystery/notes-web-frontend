@@ -1,0 +1,10 @@
+query getMyNotes {
+   me {
+      notes {
+         id
+         body
+         title
+         date
+      }
+   }
+}

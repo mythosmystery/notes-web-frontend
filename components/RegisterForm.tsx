@@ -18,7 +18,7 @@ const RegisterForm: FC = () => {
 
    return (
       <form onSubmit={onSubmit} onChange={onChange}>
-         <div className="flex flex-col dark:bg-background-secondary shadow-md p-2">
+         <div className="flex flex-col dark:bg-background-secondary bg-gray-200 shadow-md p-2">
             <TextInput type="text" placeholder="Email..." name="email" />
             <TextInput type="text" placeholder="First name..." name="firstName" />
             <TextInput type="text" placeholder="Last name..." name="lastName" />

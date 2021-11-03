@@ -3,9 +3,9 @@ export type User = {
    firstName: string;
    lastName: string;
    email: string;
-   notes?: Note[];
+   notes?: NoteType[];
 };
-export type Note = {
+export type NoteType = {
    id: string;
    title: string;
    body: string;

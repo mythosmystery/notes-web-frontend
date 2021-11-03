@@ -1,5 +1,7 @@
 import { ErrorMessage, Field, Form, Formik, FormikErrors, FormikHelpers } from 'formik';
+import { useRouter } from 'next/dist/client/router';
 import { FC } from 'react';
+import { useRegisterMutation } from '../generated/graphql';
 import TextInput from './TextInput';
 
 interface FormValues {
@@ -11,6 +13,9 @@ interface FormValues {
 }
 
 const RegisterForm: FC = () => {
+   const [, register] = useRegisterMutation();
+   const router = useRouter();
+
    const validate = (values: FormValues): FormikErrors<FormValues> => {
       const errors = {} as FormikErrors<FormValues>;
       if (values.password != values.confirmPassword) {
@@ -20,8 +25,11 @@ const RegisterForm: FC = () => {
    };
 
    const onSubmit = async (values: FormValues, { setSubmitting }: FormikHelpers<FormValues>) => {
-      console.log(values);
-      setSubmitting(false);
+      const res = await register({ email: values.email, firstName: values.firstName, lastName: values.firstName, password: values.password });
+      if (res.data) {
+         router.push('/notes');
+         setSubmitting(false);
+      }
    };
 
    return (

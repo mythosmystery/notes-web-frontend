@@ -1,33 +1,55 @@
-import { FC, FormEventHandler, useState } from 'react';
+import { ErrorMessage, Field, Form, Formik, FormikErrors, FormikHelpers } from 'formik';
+import { FC } from 'react';
 import TextInput from './TextInput';
 
-const RegisterForm: FC = () => {
-   const [formState, setFormState] = useState({ email: '', firstName: '', lastName: '', password: '' });
+interface FormValues {
+   email: string;
+   firstName: string;
+   lastName: string;
+   password: string;
+   confirmPassword: string;
+}
 
-   const onSubmit: FormEventHandler = async event => {
-      event.preventDefault();
-      console.log(formState);
+const RegisterForm: FC = () => {
+   const validate = (values: FormValues): FormikErrors<FormValues> => {
+      const errors = {} as FormikErrors<FormValues>;
+      if (values.password != values.confirmPassword) {
+         errors.confirmPassword = 'passwords must match';
+      }
+      return errors;
    };
-   const onChange: FormEventHandler = ({ target }) => {
-      const { name, value } = target;
-      setFormState({
-         ...formState,
-         [name]: value,
-      });
+
+   const onSubmit = async (values: FormValues, { setSubmitting }: FormikHelpers<FormValues>) => {
+      console.log(values);
+      setSubmitting(false);
    };
 
    return (
-      <form onSubmit={onSubmit} onChange={onChange}>
-         <div className="flex flex-col dark:bg-background-secondary bg-gray-200 shadow-md p-2">
-            <TextInput type="text" placeholder="Email..." name="email" />
-            <TextInput type="text" placeholder="First name..." name="firstName" />
-            <TextInput type="text" placeholder="Last name..." name="lastName" />
-            <TextInput type="password" placeholder="Password..." name="password" />
-            <button type="submit" className="p-1 dark:hover:text-accent hover:text-background dark:text-foreground text-lg active:scale-110">
-               Register
-            </button>
-         </div>
-      </form>
+      <Formik
+         initialValues={{ email: '', firstName: '', lastName: '', password: '', confirmPassword: '' } as FormValues}
+         onSubmit={onSubmit}
+         validate={validate}
+      >
+         {({ isSubmitting, isValid }) => (
+            <Form>
+               <div className="flex flex-col dark:bg-background-secondary bg-gray-200 shadow-md p-2">
+                  <Field as={TextInput} type="email" name="email" placeholder="email..." />
+                  <Field as={TextInput} type="text" name="firstName" placeholder="first name..." />
+                  <Field as={TextInput} type="text" name="lastName" placeholder="last name..." />
+                  <Field as={TextInput} type="password" name="password" placeholder="password..." />
+                  <Field as={TextInput} type="password" name="confirmPassword" placeholder="confirm password..." />
+                  <ErrorMessage name="confirmPassword" component="div" />
+                  <button
+                     type="submit"
+                     disabled={isSubmitting || !isValid}
+                     className="p-1 disabled:cursor-wait dark:disabled:hover:text-disabled disabled:hover:text-disabled dark:hover:text-accent hover:text-background dark:text-foreground text-lg "
+                  >
+                     Register
+                  </button>
+               </div>
+            </Form>
+         )}
+      </Formik>
    );
 };
 export default RegisterForm;

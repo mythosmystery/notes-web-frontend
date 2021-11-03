@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import Note from '../components/Note';
 import NoteLinkButton from '../components/NoteLinkButton';
 import { useGetMyNotesQuery } from '../generated/graphql';
+import { NoteType } from '../utils/types';
 
 export default function Notes() {
+   const [currentNote, setCurrentNote] = useState(null as null | NoteType);
    const [result] = useGetMyNotesQuery();
    const { data, fetching } = result;
    if (fetching) {
@@ -16,7 +19,7 @@ export default function Notes() {
                <h2 className="dark:text-foreground my-2 text-xl py-0.5">Saved Notes</h2>
                {data?.me?.notes.map(note => {
                   return (
-                     <NoteLinkButton key={note.id} note={note}>
+                     <NoteLinkButton key={note.id} note={note} setCurrentNote={setCurrentNote}>
                         {note.title}
                      </NoteLinkButton>
                   );
@@ -24,7 +27,7 @@ export default function Notes() {
             </div>
             <Note>
                <Note.Save />
-               <Note.Title></Note.Title>
+               <Note.Title value={currentNote?.title} />
                <Note.Textarea />
             </Note>
          </div>

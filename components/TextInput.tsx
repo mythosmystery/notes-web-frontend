@@ -1,18 +1,10 @@
-import { FC } from 'react';
+import { FC, InputHTMLAttributes } from 'react';
 
-interface Props {
-   placeholder: string;
-   type: string;
-   name: string;
-}
-
-const TextInput: FC<Props> = ({ placeholder, type, name }) => {
+const TextInput: FC<InputHTMLAttributes<HTMLInputElement>> = props => {
    return (
       <input
-         type={type}
-         placeholder={placeholder}
-         name={name}
          className="my-1 bg-transparent border-transparent dark:text-foreground focus:border-transparent focus:ring-transparent active:bg-transparent"
+         {...props}
       />
    );
 };

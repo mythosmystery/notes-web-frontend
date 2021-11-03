@@ -1,13 +1,16 @@
-import { FC, MouseEventHandler, ReactNode } from 'react';
+import { Dispatch, FC, MouseEventHandler, ReactNode, SetStateAction } from 'react';
 import { NoteType } from '../utils/types';
 import Note from './Note';
 
 interface Props {
    children: ReactNode;
    note: NoteType;
+   setCurrentNote: Dispatch<SetStateAction<NoteType | null>>;
 }
-const NoteLinkButton: FC<Props> = ({ children, note }) => {
-   const handleClick: MouseEventHandler = ({ target }) => {};
+const NoteLinkButton: FC<Props> = ({ children, note, setCurrentNote }) => {
+   const handleClick: MouseEventHandler = () => {
+      setCurrentNote(note);
+   };
    return <Note.ListItem onClick={handleClick}>{children}</Note.ListItem>;
 };
 export default NoteLinkButton;

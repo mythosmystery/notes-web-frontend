@@ -1,6 +1,5 @@
-import { MouseEventHandler, ReactNode, useContext } from 'react';
+import { MouseEventHandler, ReactNode } from 'react';
 import { FaSave } from 'react-icons/fa';
-import { UserContext, UserContextType } from '../utils/UserContext';
 import Button from './Button';
 
 interface Props {
@@ -39,10 +38,9 @@ const Title: React.FC<Props> = ({ value }) => {
 };
 
 const Save: React.FC = () => {
-   const { refetch } = useContext(UserContext) as UserContextType;
    return (
       <div className="">
-         <Button.Rounded onClick={refetch}>
+         <Button.Rounded>
             <FaSave size="24" />
          </Button.Rounded>
       </div>

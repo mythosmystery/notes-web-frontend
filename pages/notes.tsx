@@ -13,10 +13,9 @@ interface NoteFormValues {
 }
 
 export default function Notes() {
-   const [{ data, fetching }, refetch] = useGetMeQuery({ requestPolicy: 'cache-and-network' });
+   const [{ data }, refetch] = useGetMeQuery({ requestPolicy: 'cache-and-network' });
 
    const [, writeNote] = useWriteNoteMutation();
-
    const [, updateNote] = useUpdateNoteMutation();
 
    const initialValues: NoteFormValues = { title: '', body: '', id: '' };
@@ -42,10 +41,6 @@ export default function Notes() {
       }
       return errors;
    };
-
-   if (fetching) {
-      return null;
-   }
 
    return (
       <>

@@ -14,7 +14,7 @@ const Button: React.FC<ButtonHTMLAttributes<HTMLButtonElement>> = props => {
 const Rounded: React.FC<ButtonHTMLAttributes<HTMLButtonElement>> = props => {
    return (
       <button
-         className="dark:bg-active disabled:cursor-wait bg-selection rounded-full m-2 p-2 shadow-lg dark:hover:bg-foreground hover:bg-background dark:hover:text-accent hover:text-accent active:scale-125"
+         className="dark:bg-active disabled:cursor-wait bg-selection rounded-full m-2 p-2 shadow-md dark:hover:bg-foreground hover:bg-background dark:hover:text-accent hover:text-accent active:scale-125"
          {...props}
       >
          {props.children}

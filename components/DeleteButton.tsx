@@ -5,18 +5,23 @@ import { useDeleteNoteMutation } from '../generated/graphql';
 interface Props {
    noteId: string;
    refetch: () => void;
+   reset: () => void;
 }
 
-const DeleteButton: FC<Props> = ({ noteId, refetch }) => {
+const DeleteButton: FC<Props> = ({ noteId, refetch, reset }) => {
    const [, deleteNote] = useDeleteNoteMutation();
 
    const handleDelete = async () => {
-      const result = await deleteNote({ id: noteId });
-      console.log(result);
+      await deleteNote({ id: noteId });
       refetch();
+      reset();
    };
    return (
-      <button onClick={handleDelete} className="p-3 hover:text-orange text-foreground hover:bg-selection active:scale-125 active:shadow-lg">
+      <button
+         onClick={handleDelete}
+         type="reset"
+         className="p-3 hover:text-orange text-foreground hover:bg-selection active:scale-125 active:shadow-lg"
+      >
          <FaTrash />
       </button>
    );

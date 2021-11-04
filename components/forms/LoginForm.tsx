@@ -25,7 +25,7 @@ const LoginForm: FC = () => {
       <Formik initialValues={{ email: '', password: '' } as FormValues} onSubmit={onSubmit}>
          {({ isSubmitting }) => (
             <Form>
-               <div className="flex flex-col dark:bg-background-secondary bg-gray-200 shadow-md p-2">
+               <div className="flex flex-col dark:bg-background-secondary bg-white shadow-md p-2">
                   <Field as={TextInput} type="email" name="email" placeholder="email..." />
                   <Field as={TextInput} type="password" name="password" placeholder="password..." />
                   <button

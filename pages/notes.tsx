@@ -37,7 +37,7 @@ export default function Notes() {
 
          <Formik initialValues={initialValues} onSubmit={onSubmit}>
             {({ isSubmitting, setValues }) => (
-               <div className="flex justify-end h-screen md:h-full">
+               <div className="flex justify-end h-full">
                   <Note.SidePanel>
                      {data?.me?.notes.map((note, i) => {
                         return (
@@ -56,7 +56,7 @@ export default function Notes() {
                      })}
                   </Note.SidePanel>
                   <Note>
-                     <Form className="h-full">
+                     <Form className="flex flex-col h-full">
                         <div className="flex flex-row justify-center">
                            <Note.New type="reset" />
                            <div className="flex flex-grow justify-end">

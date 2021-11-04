@@ -40,7 +40,7 @@ const RegisterForm: FC = () => {
       >
          {({ isSubmitting, isValid }) => (
             <Form>
-               <div className="flex flex-col dark:bg-background-secondary bg-gray-200 shadow-md p-2">
+               <div className="flex flex-col dark:bg-background-secondary bg-white shadow-md p-2">
                   <Field as={TextInput} type="email" name="email" placeholder="email..." />
                   <Field as={TextInput} type="text" name="firstName" placeholder="first name..." />
                   <Field as={TextInput} type="text" name="lastName" placeholder="last name..." />

@@ -1,11 +1,11 @@
 import { ButtonHTMLAttributes, HTMLAttributes, InputHTMLAttributes, TextareaHTMLAttributes } from 'react';
-import { FaSave } from 'react-icons/fa';
+import { FaPlus, FaSave } from 'react-icons/fa';
 import Button from './Button';
 
 const Note: React.FC<HTMLAttributes<HTMLDivElement>> = props => {
    return (
       <div
-         className="flex flex-col w-full min-w-0 md:w-4/6 mb-10 mx-4 sm:mx-8 lg:mx-20 border-l border-t dark:border-background-secondary shadow-lg"
+         className="flex flex-col w-full min-w-0 md:w-4/6 mb-10 mx-4 sm:mx-8 lg:mx-16 border-l border-t dark:border-background-secondary shadow-lg"
          {...props}
       >
          {props.children}
@@ -27,7 +27,7 @@ const Title: React.FC<InputHTMLAttributes<HTMLInputElement>> = props => {
    return (
       <input
          type="text"
-         className="flex flex-grow bg-transparent text-center text-3xl border-none focus:ring-transparent text-foreground"
+         className="flex flex-grow bg-transparent text-center text-3xl border-none focus:ring-transparent dark:text-foreground"
          placeholder="Title"
          {...props}
       ></input>
@@ -37,7 +37,15 @@ const Title: React.FC<InputHTMLAttributes<HTMLInputElement>> = props => {
 const Save: React.FC<ButtonHTMLAttributes<HTMLButtonElement>> = props => {
    return (
       <Button.Rounded {...props}>
-         <FaSave size="24" className="text-foreground" />
+         <FaSave size="24" />
+      </Button.Rounded>
+   );
+};
+
+const New: React.FC<ButtonHTMLAttributes<HTMLButtonElement>> = props => {
+   return (
+      <Button.Rounded {...props}>
+         <FaPlus size="24" />
       </Button.Rounded>
    );
 };
@@ -52,4 +60,13 @@ const ListItem: React.FC<HTMLAttributes<HTMLDivElement>> = props => {
       </div>
    );
 };
-export default Object.assign(Note, { Textarea, Title, Save, ListItem });
+const SidePanel: React.FC<HTMLAttributes<HTMLDivElement>> = props => {
+   return (
+      <div className="hidden md:flex overflow-scroll flex-col items-center flex-grow border-t dark:border-foreground/20" {...props}>
+         <h2 className="dark:text-foreground my-2 text-xl py-0.5">Saved Notes</h2>
+         {props.children}
+      </div>
+   );
+};
+
+export default Object.assign(Note, { Textarea, Title, Save, ListItem, SidePanel, New });

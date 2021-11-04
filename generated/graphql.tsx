@@ -120,6 +120,14 @@ export type RegisterMutationVariables = Exact<{
 
 export type RegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'User', id: string, firstName: string, lastName: string, email: string } };
 
+export type UpdateNoteMutationVariables = Exact<{
+  data: UpdateNoteInput;
+  id: Scalars['String'];
+}>;
+
+
+export type UpdateNoteMutation = { __typename?: 'Mutation', updateNote: { __typename?: 'Note', id: string, title: string, body: string, date: number } };
+
 export type WriteNoteMutationVariables = Exact<{
   title: Scalars['String'];
   body: Scalars['String'];
@@ -132,11 +140,6 @@ export type GetMeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetMeQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, firstName: string, lastName: string, email: string, notes: Array<{ __typename?: 'Note', id: string, title: string, body: string, date: number }> } | null | undefined };
-
-export type GetMyNotesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetMyNotesQuery = { __typename?: 'Query', me?: { __typename?: 'User', notes: Array<{ __typename?: 'Note', id: string, body: string, title: string, date: number }> } | null | undefined };
 
 export type NoteByIdQueryVariables = Exact<{
   id: Scalars['String'];
@@ -179,6 +182,20 @@ export const RegisterDocument = gql`
 export function useRegisterMutation() {
   return Urql.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument);
 };
+export const UpdateNoteDocument = gql`
+    mutation updateNote($data: UpdateNoteInput!, $id: String!) {
+  updateNote(data: $data, id: $id) {
+    id
+    title
+    body
+    date
+  }
+}
+    `;
+
+export function useUpdateNoteMutation() {
+  return Urql.useMutation<UpdateNoteMutation, UpdateNoteMutationVariables>(UpdateNoteDocument);
+};
 export const WriteNoteDocument = gql`
     mutation writeNote($title: String!, $body: String!) {
   writeNote(title: $title, body: $body) {
@@ -211,22 +228,6 @@ export const GetMeDocument = gql`
 
 export function useGetMeQuery(options: Omit<Urql.UseQueryArgs<GetMeQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetMeQuery>({ query: GetMeDocument, ...options });
-};
-export const GetMyNotesDocument = gql`
-    query getMyNotes {
-  me {
-    notes {
-      id
-      body
-      title
-      date
-    }
-  }
-}
-    `;
-
-export function useGetMyNotesQuery(options: Omit<Urql.UseQueryArgs<GetMyNotesQueryVariables>, 'query'> = {}) {
-  return Urql.useQuery<GetMyNotesQuery>({ query: GetMyNotesDocument, ...options });
 };
 export const NoteByIdDocument = gql`
     query noteById($id: String!) {

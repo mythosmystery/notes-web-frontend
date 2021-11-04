@@ -5,10 +5,10 @@ export type ThemeContextType = {
    toggleDark: () => void;
 };
 
-export const ThemeContext = createContext<ThemeContextType>({ dark: true, toggleDark: () => {} });
+export const ThemeContext = createContext<ThemeContextType>({ dark: false, toggleDark: () => {} });
 
 export const ThemeProvider: FC = ({ children }) => {
-   const [dark, setDark] = useState(true);
+   const [dark, setDark] = useState(false);
    const toggleDark = () => {
       setDark(!dark);
    };

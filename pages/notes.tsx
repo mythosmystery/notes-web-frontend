@@ -1,5 +1,6 @@
 import { Field, Form, Formik, FormikHelpers } from 'formik';
 import React from 'react';
+import DeleteButton from '../components/DeleteButton';
 import Note from '../components/ui-components/Note';
 import { useGetMeQuery, useUpdateNoteMutation, useWriteNoteMutation } from '../generated/graphql';
 
@@ -10,7 +11,7 @@ interface NoteFormValues {
 }
 
 export default function Notes() {
-   const [{ data, fetching }] = useGetMeQuery();
+   const [{ data, fetching }, refetch] = useGetMeQuery({ requestPolicy: 'cache-and-network' });
 
    const [, writeNote] = useWriteNoteMutation();
 
@@ -20,13 +21,9 @@ export default function Notes() {
 
    const onSubmit = async (values: NoteFormValues, { setSubmitting }: FormikHelpers<NoteFormValues>) => {
       if (!values.id) {
-         console.log('adding note');
-         const result = await writeNote(values);
-         console.log(result);
+         await writeNote(values);
       } else {
-         console.log('updating note');
-         const result = await updateNote({ data: { body: values.body, title: values.title }, id: values.id });
-         console.log(result);
+         await updateNote({ data: { body: values.body, title: values.title }, id: values.id });
       }
       setSubmitting(false);
    };
@@ -40,18 +37,21 @@ export default function Notes() {
 
          <Formik initialValues={initialValues} onSubmit={onSubmit}>
             {({ isSubmitting, setValues }) => (
-               <div className="flex justify-end h-screen">
+               <div className="flex justify-end h-screen md:h-full">
                   <Note.SidePanel>
-                     {data?.me?.notes.map(note => {
+                     {data?.me?.notes.map((note, i) => {
                         return (
-                           <Note.ListItem
-                              key={note.id}
-                              onClick={() => {
-                                 setValues({ id: note.id, title: note.title, body: note.body });
-                              }}
-                           >
-                              {note.title}
-                           </Note.ListItem>
+                           <div className="flex w-full" key={i}>
+                              <Note.ListItem
+                                 key={note.id}
+                                 onClick={() => {
+                                    setValues({ id: note.id, title: note.title, body: note.body });
+                                 }}
+                              >
+                                 {note.title}
+                              </Note.ListItem>
+                              <DeleteButton key={i} noteId={note.id} refetch={refetch} />
+                           </div>
                         );
                      })}
                   </Note.SidePanel>
@@ -72,6 +72,7 @@ export default function Notes() {
                </div>
             )}
          </Formik>
+         <div className="h-6 text-center dark:text-foreground">Hunter Barton, 2021</div>
       </>
    );
 }

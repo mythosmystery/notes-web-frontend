@@ -102,6 +102,13 @@ export type User = {
   notes: Array<Note>;
 };
 
+export type DeleteNoteMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type DeleteNoteMutation = { __typename?: 'Mutation', deleteNote: { __typename?: 'DeleteMessage', message: string } };
+
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
   password: Scalars['String'];
@@ -149,6 +156,17 @@ export type NoteByIdQueryVariables = Exact<{
 export type NoteByIdQuery = { __typename?: 'Query', getNote: { __typename?: 'Note', id: string, body: string, title: string, date: number } };
 
 
+export const DeleteNoteDocument = gql`
+    mutation deleteNote($id: String!) {
+  deleteNote(id: $id) {
+    message
+  }
+}
+    `;
+
+export function useDeleteNoteMutation() {
+  return Urql.useMutation<DeleteNoteMutation, DeleteNoteMutationVariables>(DeleteNoteDocument);
+};
 export const LoginDocument = gql`
     mutation login($email: String!, $password: String!) {
   login(email: $email, password: $password) {

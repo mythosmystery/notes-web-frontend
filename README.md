@@ -1,29 +1,56 @@
-# Next.js + Tailwind CSS Example
+ 
+#  TypeNotes Web Frontend
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v2.2)](https://blog.tailwindcss.com/tailwindcss-2-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+### Project Created By: Hunter Barton
+## **Description**
+A beautiful and responsive user experience. Created with Next.js, React, TailwindCSS, URQL, and Typescript.  
+  
+***
+## **Table of Contents**
+* [Installation](#installation)
+* [Usage](#usage)
+* [License](#license) 
+* [Contributing](#contributing)
+* [Tests](#tests)
+* [Questions](#questions)
+***
+  
+## Installation 
+navigate to the repository folder then run `npm i`, then run `npm run dev` this will start a development server on `http://localhost:3000`
 
-It uses the new [`Just-in-Time Mode`](https://tailwindcss.com/docs/just-in-time-mode) for Tailwind CSS.
+  
+## Usage
+Write your first note then save it, from there you can add more notes and click on their title in the sidebar to view them. If you edit them you can save again and it will save the edits.
 
-## Preview
+  
+## Configuring
+N/A
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
 
-## Deploy your own
+## Technologies Used
+* Typescript
+* React
+* Next.js
+* URQL
+* TailwindCSS
+* Formik
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+  
+## Contributing
+Create a pull request
+If you would like to add to this project, you can [follow me on GitHub](https://github.com/mythosmystery).  
+  
+## Tests
+Test it by using it
+  
+## Questions:
+If you have any questions about this project, you can reach me [on GitHub](https://github.com/mythosmystery)
+or via email at hunterblakebarton@gmail.com.
+  
+## License
+MIT
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  
+**TypeNotes Web Frontend created 11/04/2021, by Hunter Barton.** 
+  

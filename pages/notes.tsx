@@ -5,6 +5,7 @@ import Note from '../components/ui-components/Note';
 import { useGetMeQuery, useUpdateNoteMutation, useWriteNoteMutation } from '../generated/graphql';
 import LogoutButton from '../components/LogoutButton';
 import ErrorCard from '../components/ErrorCard';
+import Head from 'next/head';
 
 interface NoteFormValues {
    id?: string;
@@ -44,6 +45,11 @@ export default function Notes() {
 
    return (
       <>
+         <Head>
+            <title>My Notes</title>
+            <link rel="icon" href="/favicon.ico" />
+         </Head>
+
          <h1 className="dark:text-foreground text-center py-8 text-4xl">{data?.me?.firstName}'s Notes</h1>
          <LogoutButton />
 

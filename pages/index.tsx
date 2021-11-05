@@ -7,7 +7,7 @@ const Home: React.FC = () => {
    return (
       <div className="h-screen">
          <Head>
-            <title>Create Next App</title>
+            <title>Login or Sign Up</title>
             <link rel="icon" href="/favicon.ico" />
          </Head>
          <div className="text-center dark:text-foreground pt-16">

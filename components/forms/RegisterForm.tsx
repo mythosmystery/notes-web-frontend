@@ -2,6 +2,7 @@ import { ErrorMessage, Field, Form, Formik, FormikErrors, FormikHelpers } from '
 import { useRouter } from 'next/dist/client/router';
 import { FC } from 'react';
 import { useRegisterMutation } from '../../generated/graphql';
+import ErrorCard from '../ErrorCard';
 import TextInput from '../ui-components/TextInput';
 
 interface FormValues {
@@ -24,11 +25,13 @@ const RegisterForm: FC = () => {
       return errors;
    };
 
-   const onSubmit = async (values: FormValues, { setSubmitting }: FormikHelpers<FormValues>) => {
+   const onSubmit = async (values: FormValues, { setSubmitting, setErrors }: FormikHelpers<FormValues>) => {
       const res = await register({ email: values.email, firstName: values.firstName, lastName: values.firstName, password: values.password });
-      if (res.data) {
+      if (res.data?.register) {
          router.push('/notes');
          setSubmitting(false);
+      } else {
+         setErrors({ email: 'Account already exists, please log in' });
       }
    };
 
@@ -37,16 +40,18 @@ const RegisterForm: FC = () => {
          initialValues={{ email: '', firstName: '', lastName: '', password: '', confirmPassword: '' } as FormValues}
          onSubmit={onSubmit}
          validate={validate}
+         validateOnChange={true}
       >
          {({ isSubmitting, isValid }) => (
             <Form>
                <div className="flex flex-col dark:bg-background-secondary bg-white shadow-md p-2">
                   <Field as={TextInput} type="email" name="email" placeholder="email..." />
+                  <ErrorMessage component={ErrorCard} name="email" />
                   <Field as={TextInput} type="text" name="firstName" placeholder="first name..." />
                   <Field as={TextInput} type="text" name="lastName" placeholder="last name..." />
                   <Field as={TextInput} type="password" name="password" placeholder="password..." />
                   <Field as={TextInput} type="password" name="confirmPassword" placeholder="confirm password..." />
-                  <ErrorMessage name="confirmPassword" component="div" />
+                  <ErrorMessage name="confirmPassword" component={ErrorCard} />
                   <button
                      type="submit"
                      disabled={isSubmitting || !isValid}

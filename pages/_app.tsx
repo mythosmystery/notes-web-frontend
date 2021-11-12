@@ -4,12 +4,13 @@ import { createClient } from '@urql/core';
 import { Provider } from 'urql';
 import { ThemeProvider } from '../utils/ThemeContext';
 import ThemeWrapper from '../components/ThemeWrapper';
+import { AnimatePresence } from 'framer-motion';
 
 const client = createClient({
    url: 'https://hb-notes-backend.herokuapp.com/graphql',
    fetchOptions: {
-      credentials: 'include',
-   },
+      credentials: 'include'
+   }
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -17,7 +18,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Provider value={client}>
          <ThemeProvider>
             <ThemeWrapper>
-               <Component {...pageProps} />
+               <AnimatePresence exitBeforeEnter>
+                  <Component {...pageProps} />
+               </AnimatePresence>
             </ThemeWrapper>
          </ThemeProvider>
       </Provider>

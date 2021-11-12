@@ -4,6 +4,7 @@ import { useRouter } from 'next/dist/client/router';
 import { useLoginMutation } from '../../generated/graphql';
 import TextInput from '../ui-components/TextInput';
 import ErrorCard from '../ErrorCard';
+import { motion } from 'framer-motion';
 
 interface FormValues {
    email: string;
@@ -29,18 +30,24 @@ const LoginForm: FC = () => {
       <Formik initialValues={{ email: '', password: '' } as FormValues} onSubmit={onSubmit}>
          {({ isSubmitting }) => (
             <Form>
-               <div className="flex flex-col dark:bg-background-secondary bg-white shadow-md p-2">
-                  <Field as={TextInput} type="email" name="email" placeholder="email..." />
-                  <Field as={TextInput} type="password" name="password" placeholder="password..." />
-                  <ErrorMessage component={ErrorCard} name="password" />
-                  <button
-                     type="submit"
+               <motion.div
+                  initial={{ x: -500 }}
+                  animate={{ x: 0 }}
+                  exit={{ x: 500 }}
+                  className='flex flex-col dark:bg-background-secondary bg-white shadow-md p-2'
+               >
+                  <Field as={TextInput} type='email' name='email' placeholder='email...' />
+                  <Field as={TextInput} type='password' name='password' placeholder='password...' />
+                  <ErrorMessage component={ErrorCard} name='password' />
+                  <motion.button
+                     whileTap={{ y: 7 }}
+                     type='submit'
                      disabled={isSubmitting}
-                     className="p-1 disabled:cursor-wait dark:disabled:hover:text-disabled dark:hover:text-accent hover:text-background dark:text-foreground text-lg "
+                     className='p-1 disabled:cursor-wait dark:disabled:hover:text-disabled dark:hover:text-accent hover:text-background dark:text-foreground text-lg '
                   >
                      Login
-                  </button>
-               </div>
+                  </motion.button>
+               </motion.div>
             </Form>
          )}
       </Formik>

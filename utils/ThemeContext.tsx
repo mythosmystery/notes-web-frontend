@@ -1,4 +1,4 @@
-import { createContext, FC, useState } from 'react';
+import { createContext, FC, useEffect, useState } from 'react';
 
 export type ThemeContextType = {
    dark: boolean;
@@ -11,6 +11,10 @@ export const ThemeProvider: FC = ({ children }) => {
    const [dark, setDark] = useState(false);
    const toggleDark = () => {
       setDark(!dark);
+      localStorage.setItem('dark', JSON.stringify(!dark));
    };
+   useEffect(() => {
+      setDark(localStorage.getItem('dark') ? JSON.parse(localStorage.getItem('dark') as string) : false);
+   }, []);
    return <ThemeContext.Provider value={{ dark, toggleDark }}>{children}</ThemeContext.Provider>;
 };

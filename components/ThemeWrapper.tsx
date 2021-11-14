@@ -9,7 +9,7 @@ const ThemeWrapper: FC = ({ children }) => {
    return (
       <div className={dark ? 'dark' : ''}>
          <div className='dark:bg-background font-mono min-h-screen bg-gray-200 overflow-hidden'>
-            <motion.div initial={{ y: 200 }} animate={{ y: 0 }} className='absolute'>
+            <motion.div initial={{ translateY: -200 }} animate={{ translateY: 0 }} className='absolute'>
                <Button.Rounded onClick={toggleDark}>{dark ? <FaSun size='22' /> : <FaMoon size='22' />}</Button.Rounded>
             </motion.div>
             {children}

@@ -26,9 +26,19 @@ const LoginForm: FC = () => {
       }
    };
 
+   const validate = ({ email, password }: FormValues) => {
+      const errors = {} as FormValues;
+      if (!email) {
+         errors.email = 'Please enter your email';
+      } else if (!password) {
+         errors.password = 'Please enter your password';
+      }
+      return errors;
+   };
+
    return (
-      <Formik initialValues={{ email: '', password: '' } as FormValues} onSubmit={onSubmit}>
-         {({ isSubmitting }) => (
+      <Formik initialValues={{ email: '', password: '' } as FormValues} onSubmit={onSubmit} validate={validate}>
+         {({ isSubmitting, isValid }) => (
             <Form>
                <motion.div
                   initial={{ x: -500 }}
@@ -37,12 +47,13 @@ const LoginForm: FC = () => {
                   className='flex flex-col dark:bg-background-secondary bg-white shadow-md p-2'
                >
                   <Field as={TextInput} type='email' name='email' placeholder='email...' />
+                  <ErrorMessage component={ErrorCard} name='email' />
                   <Field as={TextInput} type='password' name='password' placeholder='password...' />
                   <ErrorMessage component={ErrorCard} name='password' />
                   <motion.button
                      whileTap={{ y: 7 }}
                      type='submit'
-                     disabled={isSubmitting}
+                     disabled={isSubmitting || !isValid}
                      className='p-1 disabled:cursor-wait dark:disabled:hover:text-disabled dark:hover:text-accent hover:text-background dark:text-foreground text-lg '
                   >
                      Login

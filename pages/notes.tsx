@@ -78,7 +78,7 @@ export default function Notes() {
             {({ isSubmitting, setValues, resetForm, isValid, values }) => (
                <>
                   <ConfirmModal
-                     text='Are you sure you want to overwrite this note?'
+                     text='Are you sure you want to lose this note?'
                      show={showModal}
                      handleClose={() => setShowModal(false)}
                      callback={() => {

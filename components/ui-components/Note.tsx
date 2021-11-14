@@ -28,7 +28,7 @@ const Title: React.FC<InputHTMLAttributes<HTMLInputElement>> = props => {
    return (
       <input
          type='text'
-         className='flex flex-grow bg-transparent overflow-ellipsis text-center text-3xl border-none focus:ring-transparent dark:text-foreground'
+         className='flex flex-grow bg-transparent overflow-ellipsis text-center text-3xl border-none focus:ring-transparent dark:text-purple'
          placeholder='Title'
          {...props}
       ></input>

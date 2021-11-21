@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             />
             <meta name='description' content='Description' />
             <meta name='keywords' content='Keywords' />
-            <title>Markdown It!</title>
+            <title>Typenotes</title>
 
             <link rel='manifest' href='/manifest.json' />
             <link href='/icon-192x192.png' rel='icon' type='image/png' sizes='32x32' />

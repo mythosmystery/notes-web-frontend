@@ -5,11 +5,11 @@ module.exports = {
    darkMode: 'class', // or 'media' or 'class'
    theme: {
       extend: {
-         colors: theme,
-      },
+         colors: theme
+      }
    },
    variants: {
-      extend: {},
+      extend: {}
    },
-   plugins: [require('@tailwindcss/forms')],
+   plugins: [require('@tailwindcss/forms'), require('tailwind-scrollbar-hide')]
 };

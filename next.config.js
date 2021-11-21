@@ -1,14 +1,21 @@
 const isProd = process.env.NODE_ENV === 'production';
+const withPWA = require('next-pwa');
+const { runtimeCaching } = require('next-pwa/cache');
 
 /**
  * @type {import('next').NextConfig}
  **/
 
-module.exports = {
+module.exports = withPWA({
    images: {
       loader: 'imgix',
-      path: 'https://mythosmystery.github.io/notes-web-frontend',
+      path: 'https://mythosmystery.github.io'
    },
-   assetPrefix: isProd ? '/notes-web-frontend/' : '',
-   basePath: isProd ? '/notes-web-frontend' : '',
-};
+   pwa: {
+      dest: 'public',
+      runtimeCaching,
+      buildExcludes: [/middleware-manifest.json$/],
+      register: true,
+      skipWaiting: true
+   }
+});

@@ -22,7 +22,7 @@ const Home: React.FC = () => {
             <h2 className='text-lg my-4'>Register or Login to begin!</h2>
          </div>
          <AnimatePresence>
-            <div className='flex flex-row justify-center gap-12 py-8'>
+            <div className='flex flex-col md:flex-row justify-center gap-12 py-8'>
                <LoginForm />
                <RegisterForm />
             </div>

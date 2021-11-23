@@ -5,6 +5,7 @@ import { useLoginMutation } from '../../generated/graphql';
 import TextInput from '../ui-components/TextInput';
 import ErrorCard from '../ErrorCard';
 import { motion } from 'framer-motion';
+import auth from '../../utils/Auth';
 
 interface FormValues {
    email: string;
@@ -13,15 +14,16 @@ interface FormValues {
 
 const LoginForm: FC = () => {
    const router = useRouter();
-   const [, login] = useLoginMutation();
+   const [login] = useLoginMutation();
 
    const onSubmit = async (values: FormValues, { setSubmitting, setErrors }: FormikHelpers<FormValues>) => {
-      const res = await login(values);
-      if (res.data?.login) {
+      const { data } = await login({ variables: { ...values } });
+      if (data?.login) {
+         auth.login(data.login.token);
          setSubmitting(false);
          router.push('/notes');
       }
-      if (!res.data?.login) {
+      if (!data?.login) {
          setErrors({ password: 'Incorrect email or password' });
       }
    };

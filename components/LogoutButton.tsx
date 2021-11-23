@@ -1,21 +1,20 @@
 import { useRouter } from 'next/dist/client/router';
 import { FC } from 'react';
 import { FiLogOut } from 'react-icons/fi';
-import { useLogoutMutation } from '../generated/graphql';
+import auth from '../utils/Auth';
 import Button from './ui-components/Button';
 
 const LogoutButton: FC = () => {
    const router = useRouter();
-   const [{ fetching }, logout] = useLogoutMutation();
    const handleLogout = async () => {
-      await logout();
+      auth.logout();
       router.push('/');
    };
 
    return (
-      <div className="absolute top-0 right-0">
-         <Button.Rounded onClick={handleLogout} disabled={fetching}>
-            <FiLogOut size="22" />
+      <div className='absolute top-0 right-0'>
+         <Button.Rounded onClick={handleLogout}>
+            <FiLogOut size='22' />
          </Button.Rounded>
       </div>
    );

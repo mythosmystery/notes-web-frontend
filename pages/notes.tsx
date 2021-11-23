@@ -22,10 +22,10 @@ const variants = {
 };
 
 export default function Notes() {
-   const [{ data }, refetch] = useGetMeQuery({ requestPolicy: 'cache-and-network' });
+   const { data, refetch } = useGetMeQuery({ fetchPolicy: 'cache-and-network' });
 
-   const [, writeNote] = useWriteNoteMutation();
-   const [, updateNote] = useUpdateNoteMutation();
+   const [writeNote] = useWriteNoteMutation();
+   const [updateNote] = useUpdateNoteMutation();
 
    const [showModal, setShowModal] = useState(false);
 
@@ -33,12 +33,24 @@ export default function Notes() {
 
    const onSubmit = async (values: NoteFormValues, { setSubmitting, setValues }: FormikHelpers<NoteFormValues>) => {
       if (!values.id) {
-         const { data } = await writeNote(values);
+         const { data } = await writeNote({ variables: { ...values } });
          if (data) {
-            setValues({ id: data.writeNote.id, title: data.writeNote.title, body: data.writeNote.body });
+            setValues({
+               id: data.writeNote.id,
+               title: data.writeNote.title,
+               body: data.writeNote.body
+            });
          }
       } else {
-         await updateNote({ data: { body: values.body, title: values.title }, id: values.id });
+         await updateNote({
+            variables: {
+               data: {
+                  body: values.body,
+                  title: values.title
+               },
+               id: values.id
+            }
+         });
       }
       setSubmitting(false);
    };

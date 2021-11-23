@@ -76,7 +76,7 @@ export default function Notes() {
          resetForm();
       }
    };
-   if (error) {
+   if (error || !data?.me) {
       console.log(error);
       router.push('/');
    }

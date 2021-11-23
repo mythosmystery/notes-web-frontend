@@ -22,8 +22,17 @@ const RegisterForm: FC = () => {
 
    const validate = (values: FormValues): FormikErrors<FormValues> => {
       const errors = {} as FormikErrors<FormValues>;
-      if (values.password != values.confirmPassword) {
-         errors.confirmPassword = 'passwords must match';
+      if (values.confirmPassword != values.password) {
+         errors.confirmPassword = 'Passwords must match';
+      }
+      if (!values.email) {
+         errors.email = 'Please enter your email';
+      }
+      if (!values.password) {
+         errors.password = 'Please enter your password';
+      }
+      if (!values.confirmPassword) {
+         errors.confirmPassword = 'Please reenter your password';
       }
       return errors;
    };
@@ -73,6 +82,7 @@ const RegisterForm: FC = () => {
                   <Field as={TextInput} type='text' name='firstName' placeholder='first name...' />
                   <Field as={TextInput} type='text' name='lastName' placeholder='last name...' />
                   <Field as={TextInput} type='password' name='password' placeholder='password...' />
+                  <ErrorMessage name='password' component={ErrorCard} />
                   <Field as={TextInput} type='password' name='confirmPassword' placeholder='confirm password...' />
                   <ErrorMessage name='confirmPassword' component={ErrorCard} />
                   <motion.button

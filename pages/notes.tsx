@@ -34,7 +34,11 @@ export default function Notes() {
 
    const initialValues: NoteFormValues = { title: '', body: '', id: '' };
 
-   const onSubmit = async (values: NoteFormValues, { setSubmitting, setValues }: FormikHelpers<NoteFormValues>) => {
+   const onSubmit = async (
+      values: NoteFormValues,
+      { setSubmitting, setValues, validateForm }: FormikHelpers<NoteFormValues>
+   ) => {
+      validateForm();
       if (!values.id) {
          const { data } = await writeNote({ variables: { ...values }, refetchQueries: [GetMeDocument, 'getMe'] });
          if (data) {

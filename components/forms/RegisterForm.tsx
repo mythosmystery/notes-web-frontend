@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/dist/client/router';
 import { FC } from 'react';
 import { useRegisterMutation } from '../../generated/graphql';
-import auth from '../../utils/Auth';
+import { useAuth } from '../../utils/auth';
 import ErrorCard from '../ErrorCard';
 import TextInput from '../ui-components/TextInput';
 
@@ -16,6 +16,7 @@ interface FormValues {
 }
 
 const RegisterForm: FC = () => {
+   const { signIn } = useAuth();
    const [register] = useRegisterMutation();
    const router = useRouter();
 
@@ -28,19 +29,21 @@ const RegisterForm: FC = () => {
    };
 
    const onSubmit = async (values: FormValues, { setSubmitting, setErrors }: FormikHelpers<FormValues>) => {
-      const { data } = await register({
-         variables: {
-            email: values.email,
-            firstName: values.firstName,
-            lastName: values.firstName,
-            password: values.password
+      try {
+         const { data } = await register({
+            variables: {
+               email: values.email,
+               firstName: values.firstName,
+               lastName: values.firstName,
+               password: values.password
+            }
+         });
+         if (data?.register) {
+            signIn(data.register.token);
+            router.push('/notes');
+            setSubmitting(false);
          }
-      });
-      if (data?.register) {
-         auth.login(data.register.token);
-         router.push('/notes');
-         setSubmitting(false);
-      } else {
+      } catch (err) {
          setErrors({ email: 'Account already exists, please log in' });
       }
    };

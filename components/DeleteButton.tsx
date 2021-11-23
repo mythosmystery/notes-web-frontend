@@ -9,18 +9,18 @@ interface Props {
 }
 
 const DeleteButton: FC<Props> = ({ noteId, refetch, reset }) => {
-   const [, deleteNote] = useDeleteNoteMutation();
+   const [deleteNote] = useDeleteNoteMutation();
 
    const handleDelete = async () => {
-      await deleteNote({ id: noteId });
+      await deleteNote({ variables: { id: noteId } });
       refetch();
       reset();
    };
    return (
       <button
          onClick={handleDelete}
-         type="reset"
-         className="p-3 hover:text-orange text-foreground hover:bg-selection active:scale-125 active:shadow-lg"
+         type='reset'
+         className='p-3 hover:text-orange text-foreground hover:bg-selection active:scale-125 active:shadow-lg'
       >
          <FaTrash />
       </button>

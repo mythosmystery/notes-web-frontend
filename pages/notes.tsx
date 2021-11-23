@@ -2,7 +2,7 @@ import { ErrorMessage, Field, Form, Formik, FormikErrors, FormikHelpers } from '
 import React, { useState } from 'react';
 import DeleteButton from '../components/DeleteButton';
 import Note from '../components/ui-components/Note';
-import { useGetMeQuery, useUpdateNoteMutation, useWriteNoteMutation } from '../generated/graphql';
+import { GetMeDocument, useGetMeQuery, useUpdateNoteMutation, useWriteNoteMutation } from '../generated/graphql';
 import LogoutButton from '../components/LogoutButton';
 import ErrorCard from '../components/ErrorCard';
 import Head from 'next/head';
@@ -22,7 +22,7 @@ const variants = {
 };
 
 export default function Notes() {
-   const { data, refetch } = useGetMeQuery({ fetchPolicy: 'cache-and-network' });
+   const { data, refetch } = useGetMeQuery();
 
    const [writeNote] = useWriteNoteMutation();
    const [updateNote] = useUpdateNoteMutation();
@@ -33,7 +33,7 @@ export default function Notes() {
 
    const onSubmit = async (values: NoteFormValues, { setSubmitting, setValues }: FormikHelpers<NoteFormValues>) => {
       if (!values.id) {
-         const { data } = await writeNote({ variables: { ...values } });
+         const { data } = await writeNote({ variables: { ...values }, refetchQueries: [GetMeDocument, 'getMe'] });
          if (data) {
             setValues({
                id: data.writeNote.id,

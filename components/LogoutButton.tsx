@@ -1,13 +1,14 @@
 import { useRouter } from 'next/dist/client/router';
 import { FC } from 'react';
 import { FiLogOut } from 'react-icons/fi';
-import auth from '../utils/Auth';
+import { useAuth } from '../utils/auth';
 import Button from './ui-components/Button';
 
 const LogoutButton: FC = () => {
+   const { signOut } = useAuth();
    const router = useRouter();
    const handleLogout = async () => {
-      auth.logout();
+      signOut();
       router.push('/');
    };
 

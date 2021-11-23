@@ -4,16 +4,7 @@ import { ThemeProvider } from '../utils/ThemeContext';
 import ThemeWrapper from '../components/ThemeWrapper';
 import { AnimatePresence } from 'framer-motion';
 import Head from 'next/head';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-import auth from '../utils/Auth';
-
-const client = new ApolloClient({
-   uri: (process.env.API_URI as string) || 'https://hb-notes-backend.herokuapp.com/graphql',
-   cache: new InMemoryCache(),
-   headers: {
-      authorization: `bearer ${auth.getToken()}`
-   }
-});
+import { AuthProvider } from '../utils/auth';
 
 function MyApp({ Component, pageProps }: AppProps) {
    return (
@@ -33,7 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <link href='/icon-192x192.png' rel='icon' type='image/png' sizes='32x32' />
             <meta name='theme-color' content='#317EFB' />
          </Head>
-         <ApolloProvider client={client}>
+         <AuthProvider>
             <ThemeProvider>
                <ThemeWrapper>
                   <AnimatePresence exitBeforeEnter>
@@ -41,7 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                   </AnimatePresence>
                </ThemeWrapper>
             </ThemeProvider>
-         </ApolloProvider>
+         </AuthProvider>
       </>
    );
 }

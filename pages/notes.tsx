@@ -8,7 +8,7 @@ import ErrorCard from '../components/ErrorCard';
 import Head from 'next/head';
 import { motion } from 'framer-motion';
 import { ConfirmModal } from '../components/ui-components/modal/ConfirmModal';
-import { useRouter } from 'next/dist/client/router';
+import { useRouter } from 'next/router';
 
 interface NoteFormValues {
    id?: string;

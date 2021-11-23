@@ -44,6 +44,7 @@ const RegisterForm: FC = () => {
             setSubmitting(false);
          }
       } catch (err) {
+         console.error(err);
          setErrors({ email: 'Account already exists, please log in' });
       }
    };

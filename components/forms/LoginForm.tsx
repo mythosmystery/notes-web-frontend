@@ -26,6 +26,7 @@ const LoginForm: FC = () => {
             router.push('/notes');
          }
       } catch (err) {
+         console.error(err);
          setErrors({ password: 'Incorrect email or password' });
       }
    };

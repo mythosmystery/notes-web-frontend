@@ -81,9 +81,7 @@ export default function Notes() {
             <link rel='icon' href='/favicon.ico' />
          </Head>
 
-         <h1 className='dark:text-accent text-blue-400 capitalize text-center py-8 text-4xl'>
-            {data?.me?.firstName.trim()}'s Notes
-         </h1>
+         <h1 className='dark:text-accent text-blue-400 text-center py-8 text-4xl'>{data?.me?.firstName}'s Notes</h1>
          <LogoutButton />
 
          <Formik initialValues={initialValues} onSubmit={onSubmit} validate={validate}>

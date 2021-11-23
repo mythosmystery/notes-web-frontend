@@ -82,7 +82,7 @@ export default function Notes() {
          </Head>
 
          <h1 className='dark:text-accent text-blue-400 capitalize text-center py-8 text-4xl'>
-            {data?.me?.firstName}'s Notes
+            {data?.me?.firstName.trim()}'s Notes
          </h1>
          <LogoutButton />
 

@@ -8,6 +8,7 @@ import ErrorCard from '../components/ErrorCard';
 import Head from 'next/head';
 import { motion } from 'framer-motion';
 import { ConfirmModal } from '../components/ui-components/modal/ConfirmModal';
+import { useRouter } from 'next/dist/client/router';
 
 interface NoteFormValues {
    id?: string;
@@ -22,12 +23,14 @@ const variants = {
 };
 
 export default function Notes() {
-   const { data, refetch } = useGetMeQuery();
+   const { data, error, refetch } = useGetMeQuery();
 
    const [writeNote] = useWriteNoteMutation();
    const [updateNote] = useUpdateNoteMutation();
 
    const [showModal, setShowModal] = useState(false);
+
+   const router = useRouter();
 
    const initialValues: NoteFormValues = { title: '', body: '', id: '' };
 
@@ -73,6 +76,10 @@ export default function Notes() {
          resetForm();
       }
    };
+   if (error) {
+      console.log(error);
+      router.push('/');
+   }
 
    return (
       <motion.main variants={variants} initial='hidden' animate='enter' exit='exit'>

@@ -17,7 +17,11 @@ const LoginForm: FC = () => {
    const router = useRouter();
    const [login] = useLoginMutation();
 
-   const onSubmit = async (values: FormValues, { setSubmitting, setErrors }: FormikHelpers<FormValues>) => {
+   const onSubmit = async (
+      values: FormValues,
+      { setSubmitting, setErrors, validateForm }: FormikHelpers<FormValues>
+   ) => {
+      validateForm();
       try {
          const { data } = await login({ variables: { ...values } });
          if (data?.login) {

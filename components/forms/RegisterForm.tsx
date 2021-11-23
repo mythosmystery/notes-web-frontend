@@ -28,7 +28,11 @@ const RegisterForm: FC = () => {
       return errors;
    };
 
-   const onSubmit = async (values: FormValues, { setSubmitting, setErrors }: FormikHelpers<FormValues>) => {
+   const onSubmit = async (
+      values: FormValues,
+      { setSubmitting, setErrors, validateForm }: FormikHelpers<FormValues>
+   ) => {
+      validateForm();
       try {
          const { data } = await register({
             variables: {

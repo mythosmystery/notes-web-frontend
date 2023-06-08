@@ -75,7 +75,9 @@ function useProvideAuth(): AuthContextType {
   const createApolloClient = () => {
     const authorization = getAuthHeaders()
     const link = new HttpLink({
-      uri: `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/gql`,
+      uri: `${
+        process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'
+      }/graphql`,
       headers: {
         authorization
       }
